@@ -1,0 +1,2 @@
+class BasicGrainsController < ApplicationController
+end

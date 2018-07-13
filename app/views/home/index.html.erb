@@ -1,0 +1,48 @@
+<div class="jumbotron">
+  <div class="container">
+    <p><strong>Sistema mundial de información y alerta sobre la alimentación y la agricultura (SMIA)</strong> supervisa el estado de los principales cultivos alimentarios en 
+    todo el mundo para evaluar las perspectivas de producción. Para fundamentar el análisis y complementar la información de campo, el SMIA utiliza datos teledetectados que 
+    pueden proporcionar información valiosa sobre la disponibilidad del agua y la salud de la vegetación durante los periodos vegetativos. Además de las estimaciones de 
+    precipitación y el índice Normalizado Diferencial de la Vegetación (NDVI, por sus siglas en inglés), el SMIA y la División CBC de la FAo han desarrollado el Índice
+    de Estrés Agrícola (ASI, por sus siglas en inglés), un indicador rápido para la identificación temprana de zonas agrícolas probablemente afectadas por episodios de sequía,
+    o por sequía en casos extremos.
+    </p>
+  </div>
+</div>
+<div class="d-flex flex-row-reverse">
+    <span>Últimos datos: <strong>década 1 jun 2018<strong></span>
+</div>
+
+<div class"row">
+    <h1>Global</h1>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body row">
+                <div class="col-md-12 text-center">
+                    <div id="imageCarouselHomeIndex" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <% @files.each_with_index do |f, index| %>
+                                <li data-target="#imageCarouselHomeIndex" data-slide-to="<%= index %>" class="<%= index == 0 ? "active" : '' %>"></li>
+                            <%end%>
+                        </ol>
+                        <div class="carousel-inner">
+                            <% @files.each_with_index do |f, index| %>
+                                <div class="carousel-item <%= index == 0 ? "active" : '' %>">
+                                    <img class="d-block w-100" src="<%= f %>">
+                                </div>
+                            <%end%>
+                        </div>
+                        <a class="carousel-control-prev" href="#imageCarouselHomeIndex" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Anterior</span>
+                        </a>
+                        <a class="carousel-control-next" href="#imageCarouselHomeIndex" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Siguiente</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

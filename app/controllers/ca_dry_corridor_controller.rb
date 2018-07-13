@@ -1,0 +1,2 @@
+class CaDryCorridorController < ApplicationController
+end

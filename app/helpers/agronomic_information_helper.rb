@@ -1,0 +1,2 @@
+module AgronomicInformationHelper
+end

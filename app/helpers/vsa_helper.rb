@@ -1,0 +1,2 @@
+module VsaHelper
+end
