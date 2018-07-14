@@ -10,6 +10,7 @@
 
 server '51.15.142.103', user: 'deploy', roles: %w{web app}
 
+
 # role-based syntax
 # ==================
 
