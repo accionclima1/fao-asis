@@ -4,7 +4,8 @@ lock "~> 3.11.0"
 set :application, "CRR_ASSIS"
 set :repo_url, "git@github.com:accionclima1/fao-asis.git"
 
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
+set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml', 'config/master.key')
+
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
 
 set :passenger_environment_variables, { :path => '/home/deploy/.rvm/gems/ruby-2.5.1/gems/passenger-5.3.3/bin:$PATH' }
