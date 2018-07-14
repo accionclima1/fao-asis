@@ -12,8 +12,7 @@ set :passenger_environment_variables, { :path => '/home/deploy/.rvm/gems/ruby-2.
 set :passenger_restart_command, '/home/deploy/.rvm/gems/ruby-2.5.1/gems/passenger-5.3.3/bin/passenger-config restart-app'
 
 set :passenger_in_gemfile, true
-set :passenger_restart_with_sudo, true
-set :passenger_restart_with_touch, false
+set :passenger_restart_with_sudo, false
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
