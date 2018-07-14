@@ -10,7 +10,7 @@ class ImagesSearchService
 
         page = @form.page || 1
 
-        if @form.main_class == 'PE'
+        if @form.main_class == 'probabilidad'
             images = images.where(percentage: @form.percentage)
         end
 
