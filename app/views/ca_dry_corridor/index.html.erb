@@ -1,0 +1,57 @@
+<%= content_for :embed_js do %>
+  <script>
+    $(document).on('turbolinks:load', function(){
+        BASIC_GRAINS.init();
+    });
+  </script>
+<% end %>
+
+<div class="jumbotron">
+  <div class="container">
+    <%= form_with(url: ca_dry_corridor_get_images_path, model: @images, method: :get) do |f| %>
+        <div class="row">
+            <h1>Corredor Seco Centroamericano</h1>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="main_class">Índices</label>
+                    <select class="form-control" id="main_class" name="ca_dry_corridor_images_form[main_class]">
+                        <option value="asi">Índice de estrés agrícola (ASI)</option>
+                        <option value="sequia">Categorías de Sequía</option>
+                        <option value="probabilidad">Probabilidad Histórica de Sequía</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="period_type">Periodo</label>
+                    <select class="form-control" id="period_type" name="ca_dry_corridor_images_form[period_type]">
+                        <option value="t">Decadías (10 días)</option>
+                        <option value="y">Año</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="crop_type">Tipo de cultivos</label>
+                    <select class="form-control" id="crop_type" name="ca_dry_corridor_images_form[crop_type]">
+                        <option value="perennial_crops">Cultivos Perennes</option>
+                        <option value="shrub_vegetation">Vegetación Arbustiva</option>
+                    </select>
+                </div>
+                <div class="form-group" id="percentage-container" style="<%= @images.percentage == 'porcentage' ? '' : 'display:none;' %>">
+                    <label for="percentage">Probabilidad histórica de sequía</label>
+                    <select class="form-control" id="percentage" name="ca_dry_corridor_images_form[percentage]">
+                        <option value="20">20%</option>
+                        <option value="30">30%</option>
+                        <option value="50">50%</option>
+                    </select>
+                </div>                
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+    <%end%>
+  </div>
+</div>
+<div class="row">
+    <div class="col-12" id="container">
+    </div>
+</div>

@@ -16,5 +16,6 @@
 //= require lightbox
 //= require popper
 //= require bootstrap
+//= require jquery.turbolinks
 //= require turbolinks
 //= require_tree .

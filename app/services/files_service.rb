@@ -1,42 +1,92 @@
-require 'net/ssh'
+require 'pathname'
 class FilesService 
     include Callable 
 
     def initialize(args={})
-        @server_ip = '51.15.142.103'
-        @server_user = 'root'
-        @dir_name = 'last_indices'
-        @inner_folders = %w{ ASt  ASy  DEF  MRt  MRy  PEy }
-        @key_file = 'perspectivaSW.key'
-        @server_root_path = '/root/ASIS/CENTROAMERICA'
-        @ftp_server_root_path = 'ASIS/CENTROAMERICA'
-        @server_sub_path = 'SALIDA/QLK/VHt'
+        @inner_folders = %w{ ASt  ASy  MRt  MRy  PEy }
+        @image_path = 'ASIS/CENTROAMERICA'
+        @image_sub_path = 'SALIDA/QLK/VHt'
+
+        @file_regex = {
+            "ASt" => /ot(\d{4})(\d{2})(\d{2})a_m(\d+)(M|N)_(s[2|1]).png/,
+            "ASy" => /oy(\d{4})a_m(\d+)(M|N)_(s[2|1]).png/,
+            "MRt" => /ot(\d{4})(\d{2})(\d{2})x_m(\d+)(M|N)_(s[2|1]).png/,
+            "MRy" => /oy(\d{4})x_m(\d+)(M|N)_(s[2|1]).png/,
+            "PEy" => /py(\d{4})_(\d{4})a_t(\d{2})_m(\d+)(M|N)_(s[2|1]).png/
+        }
     end
 
     def call 
-        file_names = {}
-        Dir.mkdir(Rails.root.join("public", @dir_name)) unless File.exists?(Rails.root.join("public", @dir_name))
-        FileUtils.rm_rf Dir.glob(Rails.root.join("public/#{@dir_name}", '*'))
-        Net::SSH.start(@server_ip, @server_user, passphrase: 'sigma541', keys: [Rails.root.join("config", @key_file)], keys_only: true) do |ssh|
-            @inner_folders.each do |folder|
-                 file_name = (ssh.exec! "ls -t #{@server_root_path}/#{@server_sub_path}/#{folder} | head -1")
-                 file_names[folder] = file_name unless file_name.empty? 
-            end
-        end
+        sql_query = <<-SQL
+            INSERT OR IGNORE INTO images
+            (image_date, main_class, period_type, crop_type, sowing_type, pixel_type, full_path, start_year, end_year, percentage, is_csc, created_at, updated_at)
+            VALUES %{values};        
+        SQL
 
-        Net::SFTP.start(@server_ip, @server_user, passphrase: 'sigma541', keys: [Rails.root.join("config", @key_file)]) do |sftp|
-            @inner_folders.each do |folder|
-                file_name = file_names[folder]
-                if file_name
-                    file_name = file_name.sub(/\n/, '')
-                    local_io = File.new(Rails.root.join("public", @dir_name, file_name), mode: 'wb')
-                    sftp.download!("#{@ftp_server_root_path}/#{@server_sub_path}/#{folder}/#{file_name}", local_io)
-                end
+        sql_values = []
+        @inner_folders.each do |folder|
+            files = Dir.glob(Rails.root.join("public", @image_path, @image_sub_path, folder, "*.png"))
+
+            files.each do |f|
+                file_name = File.basename(f)
+                name_split = file_name.match(@file_regex[folder]).captures
+                sql_values << genarate_inser_query(folder, name_split, f, false)
             end
         end
+        complete_query = sql_query % { values: sql_values.join(',') }
+
+        ActiveRecord::Base.connection.execute(complete_query)
     end
 
     private 
 
-    attr_reader :server_ip, :server_user, :key_file, :dir_name, :inner_folders, :server_root_path, :server_sub_path
+    def genarate_inser_query(folder, values, full_path, is_csc)
+        insert_string = "(%{image_date}, %{main_class}, %{period_type}, %{crop_type}, %{sowing_type}, %{pixel_type}, %{full_path}, %{start_year}, %{end_year}, %{percentage}, %{is_csc}, date('now'), date('now'))"
+        absolute_path = Pathname.new(File.expand_path(full_path))
+        relative      = absolute_path.relative_path_from(Rails.root.join("public"))
+        case folder
+            when "ASt", "MRt"
+                return insert_string % {
+                    image_date:     "'#{DateTime.new(values[0].to_i, values[1].to_i, values[2].to_i).strftime("%F")}'",
+                    main_class:     "'#{folder[0..1]}'",
+                    period_type:    "'#{folder[2]}'",
+                    crop_type:      values[3],
+                    sowing_type:    "'#{values[5]}'",
+                    pixel_type:     "'#{values[4]}'",
+                    full_path:      "'#{relative}'",
+                    start_year:     "null",
+                    end_year:       "null",
+                    percentage:     "null",
+                    is_csc:         is_csc == true ? '1' : '0',
+                }
+            when "ASy", "MRy"
+                return insert_string % {
+                    image_date:     "null",
+                    main_class:     "'#{folder[0..1]}'",
+                    period_type:    "'#{folder[2]}'",
+                    crop_type:      "#{values[1]}",
+                    sowing_type:    "'#{values[3]}'",
+                    pixel_type:     "'#{values[2]}'",
+                    full_path:      "'#{relative}'",
+                    start_year:     values[0],
+                    end_year:       "null",
+                    percentage:     "null",
+                    is_csc:         is_csc == true ? '1' : '0',
+                }
+            when "PEy" 
+                return insert_string % {
+                    image_date:     "null",
+                    main_class:     "'#{folder[0..1]}'",
+                    period_type:    "'#{folder[2]}'",
+                    crop_type:      values[3],
+                    sowing_type:    "'#{values[5]}'",
+                    pixel_type:     "'#{values[4]}'",
+                    full_path:      "'#{relative}'",
+                    start_year:     values[0],
+                    end_year:       values[1],
+                    percentage:     values[2],
+                    is_csc:         is_csc == true ? '1' : '0',
+                }  
+        end    
+    end
 end

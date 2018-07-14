@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Date: 
+  String: 
+  Char: 
+  integer: 
+  String: 
+  char: 
+
+two:
+  Date: 
+  String: 
+  Char: 
+  integer: 
+  String: 
+  char: 

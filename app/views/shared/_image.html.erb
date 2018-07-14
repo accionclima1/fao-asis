@@ -1,0 +1,23 @@
+<div class="card" >
+    <a href="<%= img.full_path %>" data-lightbox="image_<%= index %>">
+        <img class="card-img-top" src="<%= img.full_path %>" >
+    </a>
+    <div class="card-body">
+    <h5 class="card-title"><%= get_index_type(img.main_class) %></h5>
+    <p class="card-text">Tipo de cultivo: <%= get_crop_type(img.crop_type) %></p>
+    <p class="card-text">Tipo de siembra: <%= get_sowing_type(img.sowing_type) %></p>
+    <p class="card-text">Periodo: <%= get_period_type(img.period_type) %></p>
+    <% if img.percentage %>
+        <p class="card-text">Probabilidad histórica de sequía: <%= "%#{img.percentage}" %></p>
+    <%end%>
+    </div>
+    <div class="card-footer">
+    <small class="text-muted">
+        <% if img.image_date %>
+            <%= img.image_date.strftime("%Y/%m/%d") %>
+        <%else%>
+            <%= img.start_year %> <%= "- #{img.end_year ? img.end_year : ''}" %>
+        <%end%>
+    </small>
+    </div>
+</div>

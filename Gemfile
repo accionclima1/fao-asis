@@ -39,10 +39,19 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.1.1'
 
 gem 'jquery-rails'
+gem 'jquery-turbolinks'
 
 gem 'net-ssh'
 gem 'net-scp'
 gem 'net-sftp'
+
+
+gem 'kaminari'
+gem 'bootstrap4-kaminari-views'
+
+gem 'sidekiq'
+gem 'sidekiq-scheduler'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -57,6 +66,16 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'byebug'
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-passenger', '>= 0.1.1'
+  gem 'capistrano-sidekiq'
+
+  # Remove the following if your app does not use Rails
+  gem 'capistrano-rails'
+
+  # Remove the following if your server does not use RVM
+  gem 'capistrano-rvm'
 end
 
 group :test do

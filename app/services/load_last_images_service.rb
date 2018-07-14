@@ -2,12 +2,15 @@ class LoadLastImagesService
     include Callable 
 
     def initialize(args={})
-        @dir_name = 'last_indices'
     end
 
     def call
-        path = Rails.root.join("public", @dir_name)
-        files = Dir.glob("#{path}/*").map{|f| "#{@dir_name}/#{File.basename(f)}" }
-        files
+        [
+            Image.as_y.order("image_date DESC").first,
+            Image.as_t.order("start_year DESC").first,
+            Image.mr_y.order("image_date DESC").first,
+            Image.mr_t.order("start_year DESC").first,
+            Image.pe_y.order("start_year DESC").first
+        ]
     end 
 end

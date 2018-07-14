@@ -1,0 +1,4 @@
+:schedule:
+  update_files_db:
+    cron: '0 01 * * * *' 
+    class: UpdateFilesDatabaseWorker
