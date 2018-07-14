@@ -14,6 +14,16 @@ set :passenger_restart_command, '/home/deploy/.rvm/gems/ruby-2.5.1/gems/passenge
 set :passenger_in_gemfile, false
 set :passenger_restart_with_sudo, false
 
+after "deploy:finishing" , "images:link"
+
+namespace :images do
+    task :link do
+        on roles(:app) do
+            execute "sudo ln -s /root/ASIS /var/www/CRR_ASSIS/current/public"
+        end
+    end
+end
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
