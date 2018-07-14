@@ -165,6 +165,9 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
+    passenger (5.3.3)
+      rack
+      rake (>= 0.8.1)
     popper_js (1.12.9)
     public_suffix (3.0.2)
     puma (3.11.4)
@@ -293,6 +296,7 @@ DEPENDENCIES
   net-scp
   net-sftp
   net-ssh
+  passenger
   puma (~> 3.11)
   rails (~> 5.2.0)
   sass-rails (~> 5.0)

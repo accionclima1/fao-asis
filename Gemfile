@@ -52,6 +52,9 @@ gem 'bootstrap4-kaminari-views'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
 
+group :production do
+  gem 'passenger'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
