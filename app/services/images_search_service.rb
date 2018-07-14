@@ -14,7 +14,7 @@ class ImagesSearchService
             images = images.where(percentage: @form.percentage)
         end
 
-        images = images.order("crop_type ASC, sowing_type ASC, period_type ASC, CAST(IFNULL(DATE(image_date, '%Y'), start_year) as integer) DESC")
+        images = images.order("CAST(IFNULL(DATE(image_date, '%Y'), start_year) as integer) DESC, crop_type ASC, sowing_type ASC, period_type ASC")
 
         images = images.page(page.to_i).per(20)
 
