@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root to: 'home#index'
   
+  get "informacion_agronomica/fenologia", to: "agronomic_information#phenoilogy", as: :phenoilogy
+
   get "granos_basicos", to: "basic_grains#index", as: :basic_grains
   get "granos_basicos/get_images", to: "basic_grains#get_images", as: :basic_grains_get_images
 
