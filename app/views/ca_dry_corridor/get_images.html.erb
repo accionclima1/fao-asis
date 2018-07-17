@@ -1,6 +1,6 @@
 <div class="card-deck">
   <% @images.each_with_index do |img, index| %>
-    <%= render "shared/image", img: img, index: index %>
+    <%= render "shared/image", img: img, index: index, is_csc: true %>
   <%end%>
 </div>
 
