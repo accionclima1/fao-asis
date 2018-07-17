@@ -11,6 +11,7 @@
     <%= form_with(url: basic_grains_get_images_path, model: @grains_images, method: :get) do |f| %>
         <div class="row">
             <h1>Granos Básicos de Centro América</h1>
+            <input type="hidden" name="grains_images_form[is_csc]" value="0">
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="main_class">Índices</label>
@@ -21,7 +22,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="period_type">Periodo</label>
+                    <label for="period_type" id="periodSelect">Periodo</label>
                     <select class="form-control" id="period_type" name="grains_images_form[period_type]">
                         <option value="t">Decadías (10 días)</option>
                         <option value="y">Año</option>

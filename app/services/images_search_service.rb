@@ -6,7 +6,7 @@ class ImagesSearchService
     end
 
     def call
-        images = Image.where(main_class: @form.main_class, crop_type: @form.crop_type, period_type: @form.period_type)
+        images = Image.where(main_class: @form.main_class, crop_type: @form.crop_type, period_type: @form.period_type, is_csc: @form.is_csc.to_i)
 
         page = @form.page || 1
 

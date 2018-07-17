@@ -32,6 +32,16 @@ class FilesService
                 name_split = file_name.match(@file_regex[folder]).captures
                 sql_values << genarate_inser_query(folder, name_split, f, false)
             end
+
+            # CSC folder 
+            
+            files = Dir.glob(Rails.root.join("public", "#{@image_path}_CSC", @image_sub_path, folder, "*.png"))
+
+            files.each do |f|
+                file_name = File.basename(f)
+                name_split = file_name.match(@file_regex[folder]).captures
+                sql_values << genarate_inser_query(folder, name_split, f, true)
+            end
         end
         complete_query = sql_query % { values: sql_values.join(',') }
 
