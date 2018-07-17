@@ -4,7 +4,7 @@
     </a>
     <div class="card-body">
     <h5 class="card-title"><%= get_index_type(img.main_class) %></h5>
-    <p class="card-text">Tipo de cultivo: <%= get_crop_type(img.crop_type) %></p>
+    <p class="card-text">Tipo de cultivo: <%= get_crop_type(img.crop_type, is_csc) %></p>
     <p class="card-text">Tipo de siembra: <%= get_sowing_type(img.sowing_type) %></p>
     <p class="card-text">Periodo: <%= get_period_type(img.period_type) %></p>
     <% if img.percentage %>

@@ -10,12 +10,12 @@ module BasicGrainsHelper
         end
     end
 
-    def get_crop_type(crop)
+    def get_crop_type(crop, is_csc)
         case crop 
             when 'rice'
-                "Arroz"
+                is_csc ? "Pastos anuales" : "Arroz"
             when 'corn_beans'
-                "Maíz/Frijoles"
+                is_csc ? "Pastos" : "Maíz/Frijoles"
             when 'perennial_crops'
                 "Cultivos Perennes"
             when 'shrub_vegetation'
