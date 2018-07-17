@@ -9,8 +9,11 @@ BASIC_GRAINS = {
             var value = $(this).val();
             if(value == 'probabilidad'){
                 $("#percentage-container").show();
+                $("#periodSelect").hide();
+                $('#period_type').prop('selectedIndex', 1);
             }else{
                 $("#percentage-container").hide();
+                $("#periodSelect").show();
             }
         });
     }

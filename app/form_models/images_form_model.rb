@@ -6,6 +6,7 @@ class ImagesFormModel
         :percentage,
         :crop_type,
         :period_type,
+        :is_csc,
         :page
     )
 end
