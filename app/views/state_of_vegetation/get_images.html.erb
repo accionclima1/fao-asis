@@ -1,0 +1,11 @@
+<div class="card-deck diff-deck">
+  <% @images.each_with_index do |img, index| %>
+    <%= render "image", img: img, index: index %>
+  <%end%>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <%= paginate @images, :remote => true, param_name: "ca_dry_corridor_images_form[page]", theme: 'twitter-bootstrap-4' %>
+    </div>
+</div>

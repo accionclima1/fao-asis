@@ -16,6 +16,6 @@ class BasicGrainsController < ApplicationController
     private 
 
     def grain_search_params
-        params.require(:grains_images_form).permit(:main_class, :percentage, :period_type, :crop_type, :is_csc, :page)
+        params.require(:grains_images_form).permit(:main_class, :percentage, :period_type, :crop_type, :is_csc, :is_dif, :page)
     end
 end

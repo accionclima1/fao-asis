@@ -7,6 +7,9 @@ class ImagesFormModel
         :crop_type,
         :period_type,
         :is_csc,
+        :is_dif,
+        :year,
+        :dd,
         :page
     )
 end

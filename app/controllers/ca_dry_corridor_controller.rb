@@ -15,6 +15,6 @@ class CaDryCorridorController < ApplicationController
     private 
 
     def grain_search_params
-        params.require(:ca_dry_corridor_images_form).permit(:main_class, :percentage, :crop_type, :period_type, :is_csc, :page)
+        params.require(:ca_dry_corridor_images_form).permit(:main_class, :percentage, :crop_type, :period_type, :is_csc, :is_dif, :page)
     end
 end

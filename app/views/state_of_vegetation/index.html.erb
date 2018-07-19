@@ -1,0 +1,79 @@
+<%= content_for :embed_js do %>
+  <script>
+    $(document).on('turbolinks:load', function(){
+        BASIC_GRAINS.init();
+    });
+  </script>
+<% end %>
+
+<div class="jumbotron">
+  <div class="container">
+    <%= form_with(url: state_of_vegetation_get_images_path, model: @images, method: :get) do |f| %>
+        <div class="row">
+            <h1>Estado de la vegetación</h1>
+			&nbsp;
+			<input type="hidden" name="state_of_vegetation_images_form[is_csc]" value="0">
+            <input type="hidden" name="state_of_vegetation_images_form[is_dif]" value="1">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="year">Índices</label>
+                    <select class="form-control" id="year" name="state_of_vegetation_images_form[year]">
+                        <%= (1984..DateTime.now.year).to_a.reverse.each do |year| %>
+                            <option value="<%= year %>"><%= year %></option>
+                        <%end%>
+                    </select>
+                </div>
+                <div class="form-group" id="periodSelect">
+                    <label for="dd">Deca día</label>
+                    <select class="form-control" id="dd" name="state_of_vegetation_images_form[dd]">
+                        <option value="01-01">1 ene</option>
+                        <option value="01-11">2 ene</option>
+                        <option value="01-21">3 ene</option>
+                        <option value="02-01">1 feb</option>
+                        <option value="02-11">2 feb</option>
+                        <option value="02-21">3 feb</option>
+                        <option value="03-01">1 mar</option>
+                        <option value="03-11">2 mar</option>
+                        <option value="03-21">3 mar</option>
+                        <option value="04-01">1 abr</option>
+                        <option value="04-11">2 abr</option>
+                        <option value="04-21">3 abr</option>
+                        <option value="05-01">1 may</option>
+                        <option value="05-11">2 may</option>
+                        <option value="05-21">3 may</option>
+                        <option value="06-01">1 jun</option>
+                        <option value="06-11">2 jun</option>
+                        <option value="06-21">3 jun</option>
+                        <option value="07-01">1 jul</option>
+                        <option value="07-11">2 jul</option>
+                        <option value="07-21">3 jul</option>
+                        <option value="08-01">1 ago</option>
+                        <option value="08-11">2 ago</option>
+                        <option value="08-21">3 ago</option>
+                        <option value="09-01">1 sep</option>
+                        <option value="09-11">2 sep</option>
+                        <option value="09-21">3 sep</option>
+                        <option value="10-01">1 oct</option>
+                        <option value="10-11">2 oct</option>
+                        <option value="10-21">3 oct</option>
+                        <option value="11-01">1 nov</option>
+                        <option value="11-11">2 nov</option>
+                        <option value="11-21">3 nov</option>
+                        <option value="12-01">1 dic</option>
+                        <option value="12-11">2 dic</option>
+                        <option value="12-21">3 dic</option>
+                    </select>
+                </div>        
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+    <%end%>
+  </div>
+</div>
+<div class="row">
+    <div class="col-12" id="container">
+    </div>
+</div>
