@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_13_221134) do
+ActiveRecord::Schema.define(version: 2018_07_19_021403) do
 
   create_table "images", force: :cascade do |t|
     t.datetime "image_date"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 2018_07_13_221134) do
     t.boolean "is_csc"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_dif"
+    t.string "name"
     t.index ["crop_type"], name: "index_images_on_crop_type"
     t.index ["end_year"], name: "index_images_on_end_year"
     t.index ["full_path"], name: "index_images_on_full_path", unique: true
