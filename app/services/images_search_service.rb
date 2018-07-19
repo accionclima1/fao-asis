@@ -6,8 +6,8 @@ class ImagesSearchService
     end
 
     def call
-
-        if @form.is_dif
+        
+        if @form.is_dif == "1"
             date = "#{@form.year}-#{@form.dd}"
             images = Image.where("is_dif = 1 AND image_date = '#{date}' ")
             images = images.order("image_date DESC, name DESC")
