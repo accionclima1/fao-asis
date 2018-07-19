@@ -4,4 +4,7 @@ class AgronomicInformationController < ApplicationController
 
     def phenoilogy
     end
+	
+	def cover
+	end
 end
