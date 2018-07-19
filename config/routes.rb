@@ -11,4 +11,6 @@ Rails.application.routes.draw do
 
   get "estado_de_la_vegetacion", to: "state_of_vegetation#index", as: :state_of_vegetation
   get "estado_de_la_vegetacion/get_images", to: "state_of_vegetation#get_images", as: :state_of_vegetation_get_images
+  
+  get "referencias", to: "references#index", as: :references
 end

@@ -11,6 +11,13 @@
     <%= form_with(url: state_of_vegetation_get_images_path, model: @images, method: :get) do |f| %>
         <div class="row">
             <h1>Estado de la vegetación</h1>
+			<p tyle="text-align:justify"><strong>El Índice de Salud de la Vegetación (VHI, por sus siglas en inglés) o estado de la vegetación</strong>; es un 
+			índice compuesto y el indicador elemental utilizado para calcular el ASI. Combina tanto el VCI como el Índice de Condiciones de Temperatura
+			(TCI, por sus siglas en inglés). El TCI se calcula utilizando una ecuación similar a la del VCI, pero relaciona la temperatura actual con 
+			el máximo a largo plazo, ya que se supone que las temperaturas más altas tienden a deteriorar las condiciones de la vegetación. Una 
+			disminución del VHI tras, por ejemplo, una reducción del VCI (vegetación verde relativamente deficiente) y un TCI creciente (temperaturas 
+			más cálidas) sería sinónimo de vegetación estresada, y durante un período más largo, un indicativo de sequía. A los componentes del VHI (
+			VCI y TCI) se les otorga la misma ponderación cuando se calcula el índice.</p>
 			&nbsp;
 			<input type="hidden" name="state_of_vegetation_images_form[is_csc]" value="0">
             <input type="hidden" name="state_of_vegetation_images_form[is_dif]" value="1">
